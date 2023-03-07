@@ -31,23 +31,39 @@
 
 <body class="dark">
 	<div id="content">
-		<h1> the 8:25 clock wow </h1>
-
+		<h1> How long until 8:17 (en) </h1>
 		<div id="lines" class="clock display">
 			<div id="clock"></div>
 			<div id="display"></div>
 		</div>
 
-		<audio controls id="audio" src="media/barka.ogg"></audio>
+		<audio controls id="audio" src="media/media_barka.mp3"></audio>
 
 		<div id="eyes" class="hidden low" data-count="0">
 
 		</div>
-    </div>
+
+		<div id="chat" class="hidden">
+			<div id="messages">
+				
+			</div>
+
+			<div id="input">
+				<input type="text" id="message" maxlength="120" autocomplete="off" placeholder="czat">
+				<input type="button" id="send" value="➤">
+			</div>
+		</div>
+
+	</div>
+
+
+	<div id="footer">
+		<a href="https://github.com/Maathias/iledopapiezowej">Maathias/iledopapiezowej</a> <span id='ver'></span>
+	</div>
 
 	<div id="settings">
 		<div class="section">
-			<div class="header">Settings</div>
+			<div class="header">Ustawienia</div>
 
 			<label class="toggle" data-for="dark">
 				<input type="checkbox">
@@ -95,5 +111,3 @@
 		</div>
 	</div>
 </body>
-
-</html>
