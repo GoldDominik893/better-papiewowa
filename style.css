@@ -48,8 +48,11 @@ a:hover {
 	75% {
 		background: blue;
 	}
-	100% {
+	95% {
 		background: deeppink;
+	}
+	100% {
+		background: red;
 	}
 }
 
@@ -124,6 +127,7 @@ a:hover {
 	bottom: 3.7rem;
 	z-index: 2;
 	left: -100vw;
+	margin-top: -60px;
 }
 
 /* chat */
