@@ -337,7 +337,7 @@ window.onload = function () {
 	}
 
 	// default goal time
-	Papiezowa.goal.setHours(11, 35, 0)
+	Papiezowa.goal.setHours(8, 23, 0)
 
 	// default events
 	Papiezowa.addOn(function () {
@@ -360,7 +360,7 @@ window.onload = function () {
 
 	// fix time if joined in the middle
 	Papiezowa.addOn(function () {
-		let offset = (120 - (parseInt(Papiezowa.remain) - 86340))
+		let offset = (60 - (parseInt(Papiezowa.remain) - 86340))
 		Elements.audio.currentTime = offset < 2 ? 0 : offset
 	})
 
