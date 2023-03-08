@@ -34,19 +34,19 @@ a:hover {
 		background: red;
 	}
 	15% {
-		background: yellow;
+		background: orange;
 	}
 	30% {
-		background: turquoise;
+		background: yellow;
 	}
 	45% {
 		background: lime;
 	}
 	60% {
-		background: crimson;
-	}
-	85% {
 		background: aqua;
+	}
+	75% {
+		background: blue;
 	}
 	100% {
 		background: deeppink;
