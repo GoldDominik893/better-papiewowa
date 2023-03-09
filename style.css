@@ -1,7 +1,7 @@
 body {
 	text-align: center;
 	vertical-align: middle;
-	margin: 0px;
+	margin: 10px;
 	background-color: #99dddd;
 	transition: background-color .2s;
 	cursor: url('media/cursor.png'), auto;
@@ -133,7 +133,7 @@ a:hover {
 /* chat */
 
 #chat{
-	position: absolute;
+    position: absolute;
     height: 100%;
     width: 29%;
     min-width: 23rem;
