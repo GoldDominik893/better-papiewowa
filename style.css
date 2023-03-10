@@ -62,7 +62,7 @@ a:hover {
 }
 
 .hidden {
-	display: block !important;
+	display: none !important;
 }
 
 #promo {
