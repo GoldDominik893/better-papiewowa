@@ -1,3 +1,172 @@
+const VERSION = 'v1.17.1'
+
+var Elements = {
+	display: undefined,
+	clock: undefined,
+	audio: undefined,
+	ver: undefined,
+	chat: undefined
+},
+	Papiezowa = {
+		reached: false,
+		goal: new Date,
+		remain: -1,
+		_onEvents: [],
+		_offEvents: [],
+		_on() {
+			for (let e of this._onEvents) {
+				e()
+			}
+		},
+		_off() {
+			for (let e of this._offEvents) {
+				e()
+			}
+		},
+		tick() {
+			var now = new Date
+			pad = x => ("0" + parseInt(x)).substr(-2)
+
+			if (new Date > Papiezowa.goal) Papiezowa.goal.setDate(Papiezowa.goal.getDate() + 1)
+
+			this.remain = ((this.goal - now + Socket.sync.offset) / 1000)
+
+			var h = parseInt((this.remain / 60 / 60) % 60),
+				m = parseInt((this.remain / 60) % 60),
+				s = parseInt(this.remain % 60)
+
+			if (h > 0) m = pad(m)
+			if ((h > 0) || (m > 0)) s = pad(s)
+
+			Elements.clock.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`
+			Elements.display.textContent = this.reached ? `${s}` : `${h > 0 ? `${h}:${m}:${s}` : m > 0 ? `${m}:${s}` : s}`
+
+			if (this.remain > 86340) {	// is goal 
+				if (!this.reached) {	// is reached already?
+					this.reached = true
+					this._on()
+				}
+			} else if (this.reached) {
+				this.reached = false
+				this._off()
+			}
+			setTimeout(() => {
+				this.tick()
+			}, 10)	// tick interval
+		},
+		addOn(e) {
+			this._onEvents.push(e)
+		},
+		addOff(e) {
+			this._offEvents.push(e)
+		}
+	},
+	Settings = {
+		_values: {
+			dark: false,
+			music: true,
+			rainbow: true,
+			clock: true,
+			display: true,
+			eyes: true,
+			chat: true
+		},
+		get(id) {
+			return this._values[id]
+		},
+		set(id, value) {
+			this._values[id] = value
+			this._set(id, value)
+			this.trigger(id)
+		},
+		_get(id) {
+			return JSON.parse(localStorage[`settings-${id}`] || null)
+		},
+		_set(id, value) {
+			localStorage[`settings-${id}`] = JSON.stringify(value)
+		},
+		refresh() {
+			for (let id in this._values) {
+				let value = this._get(id)	// get value from localStorage
+				if (value !== null) this._values[id] = value	// save if exists
+				else this._set(id, this._values[id])	// set default value to localStorage
+
+				document.querySelector(`.toggle[data-for="${id}"]>input`).checked = this._values[id]	// update the checkbox
+				this.trigger(id)
+			}
+		},
+		trigger(id, value) {
+			if (typeof value == 'undefined') value = this._values[id]
+			switch (id) {
+				case 'dark':
+					if (value) document.querySelector('body').classList.add('dark')
+					else document.querySelector('body').classList.remove('dark')
+					break;
+				case 'clock':
+					if (value) document.querySelector('#lines').classList.add('clock')
+					else document.querySelector('#lines').classList.remove('clock')
+					break;
+				case 'display':
+					if (value) document.querySelector('#lines').classList.add('display')
+					else document.querySelector('#lines').classList.remove('display')
+					break;
+				case 'eyes':
+					if (!value) document.querySelector('#eyes').classList.add('hidden')
+					else document.querySelector('#eyes').classList.remove('hidden')
+					break;
+				case 'rainbow':
+					if (value) document.querySelector('body').classList.add('rainbow')
+					else document.querySelector('body').classList.remove('rainbow')
+					break;
+				case 'chat':
+					if(!value) document.querySelector('#chat').classList.add('hidden')
+					else document.querySelector('#chat').classList.remove('hidden')
+			}
+		}
+	},
+	Socket = {
+		ws: null,
+		sync: {
+			begin: null,
+			end: null,
+			rtt: null,
+			ping: null,
+			diff: null,
+			offset: null
+		},
+		retries: 0,
+		send(object) {
+			if(this.ws.OPEN) return this.ws.send(JSON.stringify(object))
+		},
+		open() {
+			this.ws = new WebSocket(`wss://${location.host}/ws/`)
+
+			this.ws.onopen = () => {
+				console.info(`Socket connected`)
+				if(this.retries > 0) Chat.receive({
+					nick: 'local',
+					role: 'root',
+					content: "Połączono"
+				})
+				Socket.visibility(window.document.visibilityState === 'visible')
+
+				// re-set nick if saved
+				if(localStorage['nick']){
+					if(localStorage['nick'] != 'undefined')
+					Chat.send(`/nick ${localStorage['nick']}`)
+				}
+
+				// re-set nick if saved
+				if(localStorage['login']){
+					if(localStorage['login'] != 'undefined undefined')
+					Chat.send(`/login ${localStorage['login']}`)
+				}
+			}
+
+			this.ws.onclose = () => {
+				console.info(`Socket disconnected`)
+				Chat.receive({
+					nick: 'local',
 					role: 'root',
 					content: "Rozłączono"
 				})
