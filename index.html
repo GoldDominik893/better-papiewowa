@@ -20,34 +20,14 @@
 	<meta property="twitter:image" content="/" />
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="dark.css">
-	<script src="main.js"></script>
 </head>
 
 <body class="dark">
 	<div id="content">
-		<h1> How long until 8:23 am </h1>
+		<h1>Choose your clock</h1>
 		<div id="lines" class="clock display">
-			<div id="clock"></div>
-			<div id="display"></div>
+			<a href="08-23/">08:23</a>
 		</div>
-
-		<audio controls id="audio" src="media/media_barka.mp3"></audio>
-
-		<div id="eyes" class="hidden low" data-count="0">
-
-		</div>
-
-		<div id="chat" class="hidden">
-			<div id="messages">
-				
-			</div>
-
-			<div id="input">
-				<input type="text" id="message" maxlength="120" autocomplete="off" placeholder="czat">
-				<input type="button" id="send" value="➤">
-			</div>
-		</div>
-
 	</div>
 
 
@@ -65,46 +45,6 @@
 				<input type="checkbox">
 				<span>Dark Mode</span>
 			</label>
-			
-			<label class="toggle" data-for="chat">
-				<input type="checkbox">
-				<span>Chatbox</span>
-			</label>
-
-			<label class="toggle" data-for="clock">
-				<input type="checkbox">
-				<span>Timer</span>
-			</label>
-			</label>
-
-			<label class="toggle" data-for="display">
-				<input type="checkbox">
-				<span>Countdown</span>
-			</label>
-
-			<label class="toggle" data-for="eyes">
-				<input type="checkbox">
-				<span>View counter</span>
-			</label>
-
 		</div>
-		<div class="section">
-			<div class="header">Countdown Settings</div>
-
-			<label class="toggle" data-for="music">
-				<input type="checkbox">
-				<span>Music</span>
-			</label>
-
-			<label class="toggle" data-for="rainbow">
-				<input type="checkbox">
-				<span>Rainbow</span>
-			</label>
-		</div>
-		<div class="section hidden">
-			<div class="header">Logs</div>
-			<div id="logs" style="white-space: pre;text-align:left;font-family: monospace;"></div>
-		</div>
-	</div>
 </body>
 </html>
