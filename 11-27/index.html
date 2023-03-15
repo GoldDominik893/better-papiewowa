@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="manifest" href="../manifest.json">
+	<link rel="icon" type="image/png" href="../media/icon_64.png" />
+	<meta name="description" content="Special countdown till 8:23 am" />
+	<meta name="keywords" content="how, long, till, 8:23, am, timer, special">
+	<meta name="author" content="GoldDominik893">
+	<title>better papiewowa</title>
+	<meta property="og:title" content="Special countdown till 8:23 am" />
+	<meta property="twitter:title" content="Special countdown till 8:23 am" />
+	<meta property="og:description" content="Special countdown till 8:23 am" />
+	<meta property="twitter:description" content="Special countdown till 8:23 am" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="/" />
+	<meta property="og:image" content="/" />
+	<meta property="twitter:image" content="/" />
+	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="../dark.css">
+	<script src="main.js"></script>
+</head>
+
+<body class="dark">
+	<div id="content">
+		<h1> How long until 11:27 am </h1>
+		<div id="lines" class="clock display">
+			<div id="clock"></div>
+			<div id="display"></div>
+		</div>
+
+		<audio controls id="audio" src="../media/media_barka.mp3"></audio>
+
+		<div id="eyes" class="hidden low" data-count="0">
+
+		</div>
+
+		<div id="chat" class="hidden">
+			<div id="messages">
+				
+			</div>
+
+			<div id="input">
+				<input type="text" id="message" maxlength="120" autocomplete="off" placeholder="czat">
+				<input type="button" id="send" value="➤">
+			</div>
+		</div>
+
+	</div>
+
+
+	<div id="footer">
+		<a href="https://github.com/golddominik893/better-papiewowa">GoldDominik893/better-papiewowa</a> <span id='ver'></span>
+	</div>
+	<button onclick="openFullscreen();">Open Fullscreen</button>
+
+	<a href="../media/video.mp4">while you wait</a>
+	<div id="settings">
+		<div class="section">
+			<div class="header">Settings</div>
+
+			<label class="toggle" data-for="dark">
+				<input type="checkbox">
+				<span>Dark Mode</span>
+			</label>
+			
+			<label class="toggle" data-for="chat">
+				<input type="checkbox">
+				<span>Chatbox</span>
+			</label>
+
+			<label class="toggle" data-for="clock">
+				<input type="checkbox">
+				<span>Timer</span>
+			</label>
+			</label>
+
+			<label class="toggle" data-for="display">
+				<input type="checkbox">
+				<span>Countdown</span>
+			</label>
+
+			<label class="toggle" data-for="eyes">
+				<input type="checkbox">
+				<span>View counter</span>
+			</label>
+
+		</div>
+		<div class="section">
+			<div class="header">Countdown Settings</div>
+
+			<label class="toggle" data-for="music">
+				<input type="checkbox">
+				<span>Music</span>
+			</label>
+
+			<label class="toggle" data-for="rainbow">
+				<input type="checkbox">
+				<span>Rainbow</span>
+			</label>
+		</div>
+		<div class="section hidden">
+			<div class="header">Logs</div>
+			<div id="logs" style="white-space: pre;text-align:left;font-family: monospace;"></div>
+		</div>
+	</div>
+</body>
+</html>
